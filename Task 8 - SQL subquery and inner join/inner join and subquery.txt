@@ -1,0 +1,53 @@
+Question 1:
+
+Tables: doctor_profiles and users
+1) Retrieve doctor_user_id, first name and last name
+2) sort using last name
+3) sort in the order in which doctor is created
+
+Answers:
+
+select d.doctor_user_id AS ID,u.first_name AS FirstName,u.last_name AS LastName
+from doctor_profiles d INNER JOIN users u
+ON d.doctor_user_id=u.id;
+
+select d.doctor_user_id AS ID,u.first_name AS FirstName,u.last_name AS LastName
+from doctor_profiles d INNER JOIN users u
+ON d.doctor_user_id=u.id
+ORDER BY u.last_name;
+
+select d.doctor_user_id AS ID,u.first_name AS FirstName,u.last_name AS LastName
+from doctor_profiles d INNER JOIN users u
+ON d.doctor_user_id=u.id
+ORDER BY u.created_date_time;
+
+
+
+
+Question 2:
+
+Tables: roles,users,user_role_map
+List firstname and lastname of users who has customer care role
+
+Answer:
+
+select u.first_name,u.last_name
+from users u
+where u.id IN
+(select ur.user_id
+from user_role_map ur, roles r
+WHERE ur.role_id=r.id and r.name='CUSTOMER_CARE' 
+);
+
+		OR
+
+
+select u.first_name,u.last_name
+from users u
+where u.id IN
+(select ur.user_id
+from user_role_map ur INNER JOIN roles r
+ON ur.role_id=r.id and r.name='CUSTOMER_CARE' 
+);
+
+
