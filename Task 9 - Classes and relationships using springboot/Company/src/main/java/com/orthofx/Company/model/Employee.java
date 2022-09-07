@@ -33,12 +33,12 @@ public class Employee {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.company = new Company(" ");
+		this.company = new Company("");
 	}
 	public long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getFirstName() {

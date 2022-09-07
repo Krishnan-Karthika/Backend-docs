@@ -8,7 +8,7 @@ import com.orthofx.Company.model.Employee;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long>{
-	public List<Employee> findByCompanyId(Long companyID);
+	public List<Employee> findByCompanyCompanyID(Long companyID);
 
 }
 

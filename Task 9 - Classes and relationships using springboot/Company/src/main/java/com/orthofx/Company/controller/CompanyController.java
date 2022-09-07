@@ -25,7 +25,7 @@ import com.orthofx.Company.model.Company;
 import com.orthofx.Company.repository.CompanyRepository;
 
 @RestController
-@RequestMapping("/api/primaryClass/")
+@RequestMapping("/api/company/")
 public class CompanyController {
 	
 	@Autowired
@@ -62,7 +62,7 @@ public class CompanyController {
 		
 		//update company
 //		@PutMapping("/company/{companyId}")
-		@RequestMapping(value = "company/{companyId}", method = RequestMethod.PUT)
+		@RequestMapping(value = "/company/{companyId}", method = RequestMethod.PUT)
 		public ResponseEntity<Company> updateCompany(@PathVariable(value = "companyId") Long companyId,
 				@Validated @RequestBody Company companyDetails) throws ResourceNotFoundException {
 			Company company = companyRepository.findById(companyId)
