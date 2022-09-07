@@ -31,13 +31,13 @@ public class CompanyController {
 	@Autowired
 	private CompanyRepository companyRepository;
 	
-		//get(select company details)
+		//getAll
 		@GetMapping("/allCompanies")
 		public List<Company> getAllCompany() {
 			return companyRepository.findAll();
 		}
 		
-		//get(select company details by id)
+		//getByID
 		@GetMapping("/company/{companyId}")
 		public ResponseEntity<Company> getCompanyById(@PathVariable(value = "companyId") Long companyId)
 				throws ResourceNotFoundException {
@@ -46,22 +46,13 @@ public class CompanyController {
 			return ResponseEntity.ok().body(company);
 		}
 		
-//		@GetMapping("/company/{id}")
-//		public Optional<Company> get(@PathVariable Long companyId) {
-//			return companyRepository.findById(companyId);
-//		}
-		
-		//save(insert) company
-//		@PostMapping("/newCompany/")
-//		@RequestMapping(method=RequestMethod.POST)
-		
+
 		@RequestMapping(value="company",method=RequestMethod.POST)
 		public Company createCompany(@Validated @RequestBody Company company) {
 			return companyRepository.save(company);
 		}
 		
-		//update company
-//		@PutMapping("/company/{companyId}")
+		//update
 		@RequestMapping(value = "/company/{companyId}", method = RequestMethod.PUT)
 		public ResponseEntity<Company> updateCompany(@PathVariable(value = "companyId") Long companyId,
 				@Validated @RequestBody Company companyDetails) throws ResourceNotFoundException {
@@ -72,16 +63,8 @@ public class CompanyController {
 			final Company updatedCompany = companyRepository.save(company);
 			return ResponseEntity.ok(updatedCompany);
 		}
-		
-//		@RequestMapping(value = "company/{companyId}", method = RequestMethod.PUT)
-//		public Company update(@RequestBody Company company,@PathVariable Long id) {
-//			Company updateCompany = companyRepository.findById(id).get();
-//			updateCompany.setCompanyName(updateCompany.getCompanyName());
-//			return companyRepository.save(updateCompany);
-//		}		
-		
-		
-		//delete company
+
+		//delete
 		@DeleteMapping("/company/{companyId}")
 		@RequestMapping(value="company/{companyId}", method = RequestMethod.DELETE)
 		public Map<String, Boolean> deleteCompany(@PathVariable(value = "companyId") Long companyId)
@@ -94,13 +77,5 @@ public class CompanyController {
 			response.put("deleted", Boolean.TRUE);
 			return response;
 		}
-		
-//		@DeleteMapping("/company/{id}")
-//		@RequestMapping(method = RequestMethod.DELETE)
-		
-//		@RequestMapping(value="deleteEngine/{id}", method = RequestMethod.DELETE)
-//		public void delete(@PathVariable Long id) {
-//			companyRepository.deleteById(id);
-//		}
 
 }
