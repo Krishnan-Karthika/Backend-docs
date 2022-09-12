@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -45,7 +47,16 @@ public class EmployeeController {
 				.orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + id));
 		return ResponseEntity.ok().body(employee);
 	}
+	//getByCompanyID
+		@GetMapping("/{companyID}/employee")
+		public List<Employee> getAll(@PathVariable(value="companyID") Long companyID){
+			List<Employee> employee = new ArrayList<>();
+			employeeRepository.findByCompanyCompanyID(companyID).forEach(employee::add);
+			return employee;
+		}
 	
+	
+		
 	//insert
 	@PostMapping("/{companyId}/employee")
 	public Employee createEmployee(@Validated @RequestBody Employee employee, @PathVariable Long companyId,String companyName) {
@@ -53,7 +64,8 @@ public class EmployeeController {
 		return employeeRepository.save(employee);
 	}
 	
-	//delete
+	
+	//deleteByEID
 	@DeleteMapping("/employee/{id}")
 	public Map<String, Boolean> deleteEmployee(@PathVariable(value = "id") Long employeeId) throws ResourceNotFoundException {
 		Employee employee = employeeRepository.findById(employeeId).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + employeeId));
@@ -62,6 +74,35 @@ public class EmployeeController {
 		response.put("deleted", Boolean.TRUE);
 		return response;
 	}
+	
+//	//deleteByCID
+//		@RequestMapping(value="/{companyID}/employee/", method = RequestMethod.DELETE)
+//		public Map<String, Boolean> deleteEmpByCID(@PathVariable(value = "companyID") Long companyID) throws ResourceNotFoundException {
+//			Employee employee = employeeRepository.findById(companyID).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this company id :: " + companyID));
+//			employeeRepository.delete(employee);
+//			Map<String, Boolean> response = new HashMap<>();
+//			response.put("deleted", Boolean.TRUE);
+//			return response;
+//		}
+		
+//		//deleteByCID
+//				@RequestMapping(value="/{companyID}/employee/", method = RequestMethod.DELETE)
+//				public Map<String, Boolean> deleteEmpByCID(@PathVariable(value = "companyID") Long companyID) {
+//					List<Employee> employee = employeeRepository.findByCompanyCompanyID(companyID);
+//					employeeRepository.deleteAll(employee);
+//					Map<String, Boolean> response = new HashMap<>();
+//					response.put("deleted", Boolean.TRUE);
+//					return response;
+//				}
+				
+				//deleteByCompanyID
+				@Transactional
+				@DeleteMapping("/{companyID}/employee")
+				public void deleteByCID(@PathVariable(value="companyID") Long companyID){
+					employeeRepository.deleteByCompanyCompanyID(companyID);
+				}
+		
+		
 	
 	//update employee
 		@RequestMapping(value="{companyID}/employee/{id}",method = RequestMethod.PUT)	
@@ -73,11 +114,6 @@ public class EmployeeController {
 			return ResponseEntity.ok(updatedEmployee);
 		}
 	
-	@GetMapping("/{companyID}/employee")
-	public List<Employee> getAll(@PathVariable(value="companyID") Long companyID){
-		List<Employee> employee = new ArrayList<>();
-		employeeRepository.findByCompanyCompanyID(companyID).forEach(employee::add);
-		return employee;
-	}
+	
 	
 }

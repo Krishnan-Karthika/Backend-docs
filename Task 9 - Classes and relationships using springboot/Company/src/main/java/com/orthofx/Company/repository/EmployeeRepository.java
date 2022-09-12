@@ -10,6 +10,8 @@ import com.orthofx.Company.model.Employee;
 public interface EmployeeRepository extends JpaRepository<Employee, Long>{
 	public List<Employee> findByCompanyCompanyID(Long companyID);
 
+	public void deleteByCompanyCompanyID(Long companyID);
+
 }
 
 
