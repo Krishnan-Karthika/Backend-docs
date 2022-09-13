@@ -54,8 +54,6 @@ public class EmployeeController {
 			employeeRepository.findByCompanyCompanyID(companyID).forEach(employee::add);
 			return employee;
 		}
-	
-	
 		
 	//insert
 	@PostMapping("/{companyId}/employee")
@@ -63,8 +61,7 @@ public class EmployeeController {
 		employee.setCompany(new Company(companyId,companyName));
 		return employeeRepository.save(employee);
 	}
-	
-	
+		
 	//deleteByEID
 	@DeleteMapping("/employee/{id}")
 	public Map<String, Boolean> deleteEmployee(@PathVariable(value = "id") Long employeeId) throws ResourceNotFoundException {
@@ -75,34 +72,12 @@ public class EmployeeController {
 		return response;
 	}
 	
-//	//deleteByCID
-//		@RequestMapping(value="/{companyID}/employee/", method = RequestMethod.DELETE)
-//		public Map<String, Boolean> deleteEmpByCID(@PathVariable(value = "companyID") Long companyID) throws ResourceNotFoundException {
-//			Employee employee = employeeRepository.findById(companyID).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this company id :: " + companyID));
-//			employeeRepository.delete(employee);
-//			Map<String, Boolean> response = new HashMap<>();
-//			response.put("deleted", Boolean.TRUE);
-//			return response;
-//		}
-		
-//		//deleteByCID
-//				@RequestMapping(value="/{companyID}/employee/", method = RequestMethod.DELETE)
-//				public Map<String, Boolean> deleteEmpByCID(@PathVariable(value = "companyID") Long companyID) {
-//					List<Employee> employee = employeeRepository.findByCompanyCompanyID(companyID);
-//					employeeRepository.deleteAll(employee);
-//					Map<String, Boolean> response = new HashMap<>();
-//					response.put("deleted", Boolean.TRUE);
-//					return response;
-//				}
-				
-				//deleteByCompanyID
-				@Transactional
-				@DeleteMapping("/{companyID}/employee")
-				public void deleteByCID(@PathVariable(value="companyID") Long companyID){
-					employeeRepository.deleteByCompanyCompanyID(companyID);
-				}
-		
-		
+	//deleteByCompanyID
+	@Transactional
+	@DeleteMapping("/{companyID}/employee")
+	public void deleteByCID(@PathVariable(value="companyID") Long companyID){
+		employeeRepository.deleteByCompanyCompanyID(companyID);
+	}
 	
 	//update employee
 		@RequestMapping(value="{companyID}/employee/{id}",method = RequestMethod.PUT)	
