@@ -8,6 +8,7 @@ import java.util.Optional;
 //import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,60 +23,50 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.orthofx.Company.exception.ResourceNotFoundException;
 import com.orthofx.Company.model.Company;
+import com.orthofx.Company.model.Employee;
 import com.orthofx.Company.repository.CompanyRepository;
+import com.orthofx.Company.service.CompanyService;
+import com.orthofx.Company.service.EmployeeService;
 
 @RestController
 @RequestMapping("/api/company/")
 public class CompanyController {
 	
-	@Autowired
-	private CompanyRepository companyRepository;
+	private CompanyService companyService; 
 	
-		//getAll
-		@GetMapping("/allCompanies")
-		public List<Company> getAllCompany() {
-			return companyRepository.findAll();
-		}
-		
-		//getByID
-		@GetMapping("/company/{companyId}")
-		public ResponseEntity<Company> getCompanyById(@PathVariable(value = "companyId") Long companyId)
-				throws ResourceNotFoundException {
-			Company company = companyRepository.findById(companyId)
-					.orElseThrow(() -> new ResourceNotFoundException("Company not found for this id :: " + companyId));
-			return ResponseEntity.ok().body(company);
-		}
-		
-
-		@RequestMapping(value="company",method=RequestMethod.POST)
-		public Company createCompany(@Validated @RequestBody Company company) {
-			return companyRepository.save(company);
-		}
-		
-		//update
-		@RequestMapping(value = "/company/{companyId}", method = RequestMethod.PUT)
-		public ResponseEntity<Company> updateCompany(@PathVariable(value = "companyId") Long companyId,
-				@Validated @RequestBody Company companyDetails) throws ResourceNotFoundException {
-			Company company = companyRepository.findById(companyId)
-					.orElseThrow(() -> new ResourceNotFoundException("Company not found for this id :: " + companyId));
-			company.setCompanyID(companyDetails.getCompanyID());
-			company.setCompanyName(companyDetails.getCompanyName());
-			final Company updatedCompany = companyRepository.save(company);
-			return ResponseEntity.ok(updatedCompany);
-		}
-
-		//delete
-		@DeleteMapping("/company/{companyId}")
-		@RequestMapping(value="company/{companyId}", method = RequestMethod.DELETE)
-		public Map<String, Boolean> deleteCompany(@PathVariable(value = "companyId") Long companyId)
-				throws ResourceNotFoundException {
-			Company company = companyRepository.findById(companyId)
-					.orElseThrow(() -> new ResourceNotFoundException("Company not found for this id :: " + companyId));
-
-			companyRepository.delete(company);
-			Map<String, Boolean> response = new HashMap<>();
-			response.put("deleted", Boolean.TRUE);
-			return response;
-		}
-
+	public CompanyController(CompanyService companyService) {
+		super();
+		this.companyService = companyService;
+	}
+	
+	//create employee
+	@PostMapping
+	public ResponseEntity<Company> saveCompany(@RequestBody Company company){
+		return new ResponseEntity<Company>(companyService.saveCompany(company),HttpStatus.CREATED);
+	}
+	
+	//getAll
+	@GetMapping
+	public List<Company> getAllCompanies(){
+		return companyService.getAllCompanies();
+	}
+	
+	//getById
+	@GetMapping("{id}")
+	public ResponseEntity<Company> getCompanyById(@PathVariable(value = "id") Long id)throws ResourceNotFoundException {
+		return new ResponseEntity<Company>(companyService.getCompanyById(id) , HttpStatus.OK);
+	}
+	
+	//updateCompany
+	@PutMapping("{id}")	
+	public ResponseEntity<Company> updateCompany(@PathVariable(value = "id") Long id, @RequestBody Company company) throws ResourceNotFoundException {
+		return new ResponseEntity<Company>(companyService.updateCompany(company, id), HttpStatus.OK);
+	}
+	
+	//deleteCompany
+	@DeleteMapping("{id}")
+	public ResponseEntity<String> deleteCompany(@PathVariable(value = "id") Long id) throws ResourceNotFoundException{
+		companyService.deleteEmployee(id);
+		return new ResponseEntity<String>("Company deleted successfully", HttpStatus.OK);
+	}
 }

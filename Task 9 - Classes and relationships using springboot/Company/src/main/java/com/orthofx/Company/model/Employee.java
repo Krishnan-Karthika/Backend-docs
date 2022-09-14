@@ -1,6 +1,5 @@
 package com.orthofx.Company.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,17 +8,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="employeeTable")
+@Table(name="employee")
 public class Employee {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-	@Column(name="first_name")
 	private String firstName;
-	
-	@Column(name="last_name")
 	private String lastName;
 	
 	@ManyToOne
@@ -58,6 +53,9 @@ public class Employee {
 	}
 	public void setCompany(Company company) {
 		this.company = company;
+	}
+	public void setCompanyName(String companyName) {
+		company.setCompanyName(companyName);
 	}
 	
 	
