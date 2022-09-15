@@ -2,6 +2,8 @@ package com.orthofx.Company.service.Impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,26 +29,23 @@ public class EmployeeServiceImpl implements EmployeeService {
 		this.employeeRepository = employeeRepository;
 	}
 
+//	@Override
+//	public Employee saveEmployee(Employee employee, Long id) throws ResourceNotFoundException{
+//		return companyRepository.findById(id).map(company -> {
+//		employee.setCompany(company);
+//		return employeeRepository.save(employee);
+//			}).orElseThrow(() -> new ResourceNotFoundException("Company not found for this id :: " + id));
+//		
+//		
+//	}
+	
 	@Override
 	public Employee saveEmployee(Employee employee, Long id) throws ResourceNotFoundException{
-		return companyRepository.findById(id).map(company -> {
+		Company company = companyRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Company not found for this id :: " + id));
 		employee.setCompany(company);
 		return employeeRepository.save(employee);
-			}).orElseThrow(() -> new ResourceNotFoundException("Company not found for this id :: " + id));
-		
-		
 	}
 	
-	//employee.setLastName(employee.getLastName());
-			//employee.setFirstName(employee.getFirstName());
-	
-	//@PostMapping("/companies/{companyId}/employee")
-//public Employee creteEmployee(@Validated @RequestBody Employee employee,@RequestBody Company companyDetails, @PathVariable Long companyId) throws ResourceNotFoundException {
-//	Company company = companyRepository.findById(companyId).orElseThrow(() -> new ResourceNotFoundException("Company not found for this id :: " + companyId));
-//	employee.setCompany(companyDetails.getCompany());
-//	return employeeRepository.save(employee);
-//}
-
 	@Override
 	public List<Employee> getAllEmployees() {
 		return employeeRepository.findAll();
@@ -70,6 +69,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public void deleteEmployee(Long id)throws ResourceNotFoundException {
 		employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + id));
 		employeeRepository.deleteById(id);		
+	}
+
+	@Override
+	//@Transactional
+	public void deleteByCompanyId(Long id) throws ResourceNotFoundException {
+		employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No employees found for company id :: " + id));
+		employeeRepository.deleteByid(id);
+		
 	}
 	
 }

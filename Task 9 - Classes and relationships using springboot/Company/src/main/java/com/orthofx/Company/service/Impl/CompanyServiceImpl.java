@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.orthofx.Company.dto.CompanyDto;
 import com.orthofx.Company.exception.ResourceNotFoundException;
 import com.orthofx.Company.model.Company;
 import com.orthofx.Company.model.Employee;
@@ -29,8 +30,8 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public Company saveCompany(Company company) {
-		return companyRepository.save(company);
+	public Company saveCompany(CompanyDto companyDto) {
+		return companyRepository.save(companyDto);
 	}
 
 	@Override

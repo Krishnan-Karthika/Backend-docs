@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.orthofx.Company.dto.CompanyDto;
 import com.orthofx.Company.exception.ResourceNotFoundException;
 import com.orthofx.Company.model.Company;
 import com.orthofx.Company.model.Employee;
@@ -31,8 +33,8 @@ public class CompanyController {
 	
 	//createCompany
 	@PostMapping("/company")
-	public ResponseEntity<Company> saveCompany(@RequestBody Company company){
-		return new ResponseEntity<Company>(companyService.saveCompany(company),HttpStatus.CREATED);
+	public ResponseEntity<Company> saveCompany(@RequestBody CompanyDto companyDto){
+		return new ResponseEntity<Company>(companyService.saveCompany(companyDto),HttpStatus.CREATED);
 	}
 	
 	//getAll
