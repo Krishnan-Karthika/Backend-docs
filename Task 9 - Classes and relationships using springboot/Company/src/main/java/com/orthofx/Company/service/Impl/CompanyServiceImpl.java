@@ -2,6 +2,7 @@ package com.orthofx.Company.service.Impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -12,12 +13,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.orthofx.Company.exception.ResourceNotFoundException;
 import com.orthofx.Company.model.Company;
+import com.orthofx.Company.model.Employee;
 import com.orthofx.Company.repository.CompanyRepository;
+import com.orthofx.Company.repository.EmployeeRepository;
 import com.orthofx.Company.service.CompanyService;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
-	private CompanyRepository companyRepository;	
+	private CompanyRepository companyRepository;
+	private EmployeeRepository employeeRepository;
 	
 	public CompanyServiceImpl(CompanyRepository companyRepository) {
 		super();
@@ -38,6 +42,23 @@ public class CompanyServiceImpl implements CompanyService {
 	public Company getCompanyById(Long id)throws ResourceNotFoundException{
 		return companyRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Company not found for this id :: " + id));
 	}
+	
+	@Override
+	public Set<Employee> getEmployeesByCompanyId(Long id) throws ResourceNotFoundException {
+		Company company = companyRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Company not found for this id :: " + id));
+		return company.getEmployee();
+	}
+
+//	@Override
+//	public List<Company> getEmployeesByCid(Long id) throws ResourceNotFoundException {
+//		List<Company> company = companyRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Company not found for this id :: " + id));
+//		return company;
+//	}
+	
+//	@Override
+//	public List<Employee> getEmployeesByCompanyId(Long id) throws ResourceNotFoundException {
+//		return (List<Employee>) companyRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Company not found for this id :: " + id));
+//	}
 
 	@Override
 	public Company updateCompany(Company company, Long id)throws ResourceNotFoundException {
@@ -48,8 +69,10 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public void deleteEmployee(Long id)throws ResourceNotFoundException {
+	public void deleteCompany(Long id)throws ResourceNotFoundException {
 		companyRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Company not found for this id :: " + id));
 		companyRepository.deleteById(id);		
 	}
+
+		
 }
