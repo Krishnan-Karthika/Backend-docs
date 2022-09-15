@@ -10,7 +10,7 @@ import com.orthofx.Company.model.Employee;
 
 public interface CompanyService {
 	
-	Company saveCompany(CompanyDto companyDto);
+	Company saveCompany(Company company);
 	
 	List<Company> getAllCompanies();
 	

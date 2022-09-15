@@ -29,16 +29,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		this.employeeRepository = employeeRepository;
 	}
 
-//	@Override
-//	public Employee saveEmployee(Employee employee, Long id) throws ResourceNotFoundException{
-//		return companyRepository.findById(id).map(company -> {
-//		employee.setCompany(company);
-//		return employeeRepository.save(employee);
-//			}).orElseThrow(() -> new ResourceNotFoundException("Company not found for this id :: " + id));
-//		
-//		
-//	}
-	
+
 	@Override
 	public Employee saveEmployee(Employee employee, Long id) throws ResourceNotFoundException{
 		Company company = companyRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Company not found for this id :: " + id));

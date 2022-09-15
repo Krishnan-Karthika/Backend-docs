@@ -30,9 +30,10 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public Company saveCompany(CompanyDto companyDto) {
-		return companyRepository.save(companyDto);
+	public Company saveCompany(Company company) {
+		return companyRepository.save(company);
 	}
+	
 
 	@Override
 	public List<Company> getAllCompanies() {

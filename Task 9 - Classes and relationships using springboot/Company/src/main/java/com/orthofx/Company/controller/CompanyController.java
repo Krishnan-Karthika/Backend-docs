@@ -33,8 +33,8 @@ public class CompanyController {
 	
 	//createCompany
 	@PostMapping("/company")
-	public ResponseEntity<Company> saveCompany(@RequestBody CompanyDto companyDto){
-		return new ResponseEntity<Company>(companyService.saveCompany(companyDto),HttpStatus.CREATED);
+	public ResponseEntity<Company> saveCompany(@RequestBody Company company){
+		return new ResponseEntity<Company>(companyService.saveCompany(company),HttpStatus.CREATED);
 	}
 	
 	//getAll

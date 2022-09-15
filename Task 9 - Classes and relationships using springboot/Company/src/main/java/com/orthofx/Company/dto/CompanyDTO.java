@@ -25,11 +25,4 @@ public class CompanyDto {
 	public CompanyDto() {
 		super();
 	}
-	
-	
-	
-	
-	
-	
-
 }
