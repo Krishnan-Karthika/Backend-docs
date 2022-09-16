@@ -70,32 +70,4 @@ public class EmployeeController {
 		return new ResponseEntity<String>("Deleted all the employees of selected company", HttpStatus.OK);
 	}
 	
-//	//create employee
-//	@PostMapping("/company/{id}/employee")
-//	public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee, @PathVariable(value="id") Long id)throws ResourceNotFoundException{	
-//		return new ResponseEntity<Employee>(employeeService.saveEmployee(employee, id), HttpStatus.CREATED);
-//	}
-	
-//	//get all
-//	@GetMapping("/employees")
-//	public List<Employee> getAllEmployees() {
-//		return employeeService.getAllEmployees();
-//	}
-	
-	
-//	//getByEID
-//	@GetMapping("/employee/{id}")
-//	public ResponseEntity<Employee> getEmployeeById(@PathVariable(value="id") Long id) throws ResourceNotFoundException {
-//		return new ResponseEntity<Employee>(employeeService.getByEmployeeId(id) , HttpStatus.OK);
-//	}
-	
-
-//	//updateCompany
-//	@PutMapping("/employee/{id}")	
-//	public ResponseEntity<Employee> updateEmployee(@PathVariable(value = "id") Long id, @RequestBody Employee employee) throws ResourceNotFoundException {
-//		return new ResponseEntity<Employee>(employeeService.updateEmployee(employee, id), HttpStatus.OK);
-//	}
-	
-
-	
 }

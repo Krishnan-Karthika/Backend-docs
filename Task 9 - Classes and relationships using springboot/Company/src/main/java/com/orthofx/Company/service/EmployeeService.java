@@ -16,12 +16,3 @@ public interface EmployeeService {
 	void deleteEmployee(Long id)throws ResourceNotFoundException;                                        
 	void deleteByCompanyId(Long id)throws ResourceNotFoundException;
 }
-
-
-
-
-
-//Employee saveEmployee(Employee employee, Long id) throws ResourceNotFoundException;
-//List<Employee> getAllEmployees();
-//Employee getByEmployeeId(Long id) throws ResourceNotFoundException;
-//Employee updateEmployee(Employee employee,Long id) throws ResourceNotFoundException;

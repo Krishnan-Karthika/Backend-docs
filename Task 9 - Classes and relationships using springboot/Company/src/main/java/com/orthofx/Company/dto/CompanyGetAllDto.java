@@ -29,15 +29,6 @@ public class CompanyGetAllDto {
 			this.employee = employee;
 		}
 
-//		public CompanyGetAllDto(String companyName, Set<Employee> employee) {
-//			super(companyName);
-//			this.employee = employee;
-//		}
-//
-//		public CompanyGetAllDto(String companyName) {
-//			super(companyName);
-//		}
-
 		public CompanyGetAllDto() {
 			super();
 		}

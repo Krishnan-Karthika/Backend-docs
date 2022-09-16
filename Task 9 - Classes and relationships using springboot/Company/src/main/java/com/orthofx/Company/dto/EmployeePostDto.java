@@ -36,14 +36,4 @@ public class EmployeePostDto {
 	public EmployeePostDto() {
 		super();
 	}
-//	public void setCompany(CompanyGetAllDto companyDto) {
-//		this.setCompanyDto(companyDto);
-//		
-//	}
-//	public CompanyGetAllDto getCompanyDto() {
-//		return companyDto;
-//	}
-//	public void setCompanyDto(CompanyGetAllDto companyDto) {
-//		this.companyDto = companyDto;
-//	}
 }

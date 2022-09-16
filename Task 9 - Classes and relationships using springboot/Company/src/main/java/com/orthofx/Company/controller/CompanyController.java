@@ -65,33 +65,5 @@ public class CompanyController {
 		companyService.deleteCompany(id);
 		return new ResponseEntity<String>("Company deleted successfully", HttpStatus.OK);
 	}
-	
-	
-//	//getAll
-//	@GetMapping("/companies")
-//	public List<Company> getAllCompanies(){
-//		return companyService.getAllCompanies();
-//	}
-	
-//	//getById
-//	@GetMapping("/company/{id}")
-//	public ResponseEntity<Company> getCompanyById(@PathVariable(value = "id") Long id)throws ResourceNotFoundException {
-//		return new ResponseEntity<Company>(companyService.getCompanyById(id) , HttpStatus.OK);
-//	}
-	
-	
-//	//getEmployeeByCid
-//	@GetMapping("/company/{id}/employee")
-//	public Set<Employee> getEmployeeByCompanyId(@PathVariable(value = "id") Long id)throws ResourceNotFoundException {
-//		return companyService.getEmployeesByCompanyId(id);
-//
-//	}
-	
-//	//updateCompany
-//	@PutMapping("/company/{id}")	
-//	public ResponseEntity<Company> updateCompany(@PathVariable(value = "id") Long id, @RequestBody Company company) throws ResourceNotFoundException {
-//		return new ResponseEntity<Company>(companyService.updateCompany(company, id), HttpStatus.OK);
-//	}
-//
 
 }

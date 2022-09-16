@@ -22,10 +22,3 @@ public interface CompanyService {
 	void deleteCompany(Long id)throws ResourceNotFoundException;
 
 }
-
-
-//Company saveCompany(Company company);
-//List<Company> getAllCompanies();
-//Company getCompanyById(Long id) throws ResourceNotFoundException;
-//Set<Employee> getEmployeesByCompanyId(Long id) throws ResourceNotFoundException;
-//Company updateCompany(Company company,Long id) throws ResourceNotFoundException;
