@@ -1,6 +1,8 @@
 package com.orthofx.Company.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -26,7 +28,7 @@ public class Company {
 	
 	@JsonIgnore
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "company")
-    private Set<Employee> employee = new HashSet<>();
+    private List<Employee> employee = new ArrayList<>();
 	
 	public Company() {
 		super();
@@ -52,10 +54,10 @@ public class Company {
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
-	public Set<Employee> getEmployee() {
+	public List<Employee> getEmployee() {
 		return employee;
 	}
-	public void setEmployee(Set<Employee> employee) {
+	public void setEmployee(List<Employee> employee) {
 		this.employee = employee;
 	}
 
