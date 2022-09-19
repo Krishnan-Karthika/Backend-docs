@@ -29,6 +29,7 @@ public class EmployeePostDto {
 	
 	public EmployeePostDto(Long id, String firstName, String lastName) {
 		super();
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		}

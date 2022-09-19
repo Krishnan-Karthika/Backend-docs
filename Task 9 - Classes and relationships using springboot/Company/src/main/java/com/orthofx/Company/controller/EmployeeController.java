@@ -37,8 +37,8 @@ public class EmployeeController {
 	}
 	
 	//create employee
-	@PostMapping("/company/{id}/employee")
-	public ResponseEntity<Employee> saveEmployee(@RequestBody EmployeePostDto employeeDto, @PathVariable(value="id") Long id)throws ResourceNotFoundException{	
+	@PostMapping("/company/{companyId}/employee")
+	public ResponseEntity<Employee> saveEmployee(@RequestBody EmployeePostDto employeeDto, @PathVariable(value="companyId") Long id)throws ResourceNotFoundException{	
 		return new ResponseEntity<Employee>(employeeService.saveEmployee(employeeDto, id), HttpStatus.CREATED);
 	}
 	//get all
@@ -62,12 +62,18 @@ public class EmployeeController {
 		employeeService.deleteEmployee(id);
 		return new ResponseEntity<String>("Employee deleted successfully", HttpStatus.OK);
 	}		
-	//deleteByCompanyId	
-	@Transactional
-	@DeleteMapping("/company/{id}/employee")
-	public ResponseEntity<String> deleteByCID(@PathVariable(value="companyId") Long id) throws ResourceNotFoundException{
-		employeeService.deleteByCompanyId(id);
-		return new ResponseEntity<String>("Deleted all the employees of selected company", HttpStatus.OK);
-	}
+	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+

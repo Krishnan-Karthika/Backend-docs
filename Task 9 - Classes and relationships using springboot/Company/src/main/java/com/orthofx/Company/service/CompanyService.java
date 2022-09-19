@@ -18,7 +18,7 @@ public interface CompanyService {
 	Company updateCompany(CompanyUpdateDto CompanyDto,Long id) throws ResourceNotFoundException;        //UPDATE
 	List<Company> getAllCompanies();                                                                    //GET ALL
 	Company getCompanyById(Long id) throws ResourceNotFoundException;                                   //GET BY ID
-	List<Employee> getEmployeesByCompanyId(Long id) throws ResourceNotFoundException;                    //GET EMPLOYEES BY CID
-	void deleteCompany(Long id)throws ResourceNotFoundException;
+	List<Employee> getEmployeesByCompanyId(Long id) throws ResourceNotFoundException;                   //GET EMPLOYEES BY CID
+	void deleteCompany(Long id)throws ResourceNotFoundException;                                        //DELETE BY CID
 
 }

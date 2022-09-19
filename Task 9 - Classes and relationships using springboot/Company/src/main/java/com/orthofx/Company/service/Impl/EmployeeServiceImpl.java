@@ -1,14 +1,9 @@
 package com.orthofx.Company.service.Impl;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.orthofx.Company.dto.CompanyGetAllDto;
 import com.orthofx.Company.dto.EmployeeGetAllDto;
 import com.orthofx.Company.dto.EmployeeGetByIdDto;
 import com.orthofx.Company.dto.EmployeePostDto;
@@ -64,11 +59,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + id));
 		employeeRepository.deleteById(id);		
 	}
-
-	@Override
-	@Transactional
-	public void deleteByCompanyId(Long id) throws ResourceNotFoundException {
-		
-		
-	}
 }
+
+
+
+
+
+
+
+
+
+//
+//@Override   //DELETE BY COMPANY ID
+//@Transactional  
+//public void deleteByCompanyId(Long id) throws ResourceNotFoundException {
+//	Company company = companyRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Company not found for this id :: " + id));
+//	companyRepository.delete(company);
+//	}
+
